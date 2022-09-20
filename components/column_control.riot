@@ -1,0 +1,40 @@
+<column-control>
+  <div
+    each={id in ['code', 'text', 'facsimile']}
+    class="form-check form-switch me-5"
+  >
+    <input
+      class="form-check-input"
+      type="checkbox"
+      role="switch"
+      id="switch-{id}"
+      value={id}
+      onchange={event => onChange(event)}
+      checked={isEnabled(id)}
+    >
+    <label
+      class="form-check-label"
+      for="switch-{id}"
+    >{id}</label>
+  </div>
+
+
+  <script>
+    export default class {
+      onChange(event) {
+        const inputs = this.root.querySelectorAll('input')
+        const checked = [...inputs].filter(e => e.checked)
+        const value = checked.map(e => e.value)
+        console.log(value)
+
+        const h = this.props.setColumns
+        if (h) {h(value)}
+      }
+
+      isEnabled(id) {
+        const v = this.props.columns || []
+        return v.includes(id)
+      }
+    }
+  </script>
+</column-control>

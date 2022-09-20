@@ -1,0 +1,96 @@
+@import 'themes/journal.variables';
+
+$form-check-input-focus-box-shadow: none;
+
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+@import 'highlight.js/styles/github.css';
+
+pre {
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+fw::before {
+  content: '⟨';
+}
+
+fw::after {
+  content: '⟩';
+}
+
+ab {
+  display: block;
+  margin-bottom: 1em;
+}
+
+lb {
+  display: block;
+}
+
+w[active=true] {
+  color: #aa0000;
+}
+
+viewer {
+  .column {
+    background-color: #EDFFEA;
+  }
+}
+
+column-control {
+  .form-switch, input, label {
+    cursor: pointer;
+  }
+}
+
+.tei {
+  overflow: auto;
+
+  placeName {
+    & > * {
+      display: none;
+    }
+
+    & > settlement {
+      display: inline;
+    }
+  }
+
+  .person, .place, .artwork {
+    font-weight: bold;
+    text-decoration: underline;
+
+    & > i {
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+  }
+
+  p {
+    display: block;
+    margin-bottom: 1em;
+  }
+
+  list {
+    display: block;
+
+    & > item {
+      display: list-item;
+      list-style-type: none;
+
+      margin-left: 1em;
+    }
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  unit {
+    display: none;
+  }
+}

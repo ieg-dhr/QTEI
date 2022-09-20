@@ -1,0 +1,63 @@
+<pagination>
+  <div class="input-group mb-3">
+    <button
+      class="btn btn-primary"
+      type="button"
+      onclick={event => onPrevious(event)}
+    ><i class="bi-arrow-left-circle-fill"></i></button>
+    <select class="form-control" onchange={event => onChange(event)}>
+      <option>Select page</option>
+      <option each={page in props.pages}>{page}</option>
+    </select>
+    <button
+      class="btn btn-primary"
+      type="button"
+      onclick={event => onNext(event)}
+    ><i class="bi-arrow-right-circle-fill"></i></button>
+  </div>
+
+  <script>
+    export default class {
+      onBeforeMount(props) {
+        console.log(props.pages)
+      }
+
+      onChange(event) {
+        const value = event.target.value
+        this.loadPage(value)
+      }
+
+      onPrevious(event) {
+        event.preventDefault()
+        const current = this.props.page
+        const i = this.props.pages.indexOf(current)
+
+        if (i > 0) {
+          const page = this.props.pages[i - 1]
+          this.loadPage(page)
+        }
+      }
+
+      onNext(event) {
+        event.preventDefault()
+        const current = this.props.page
+        const i = this.props.pages.indexOf(current)
+
+        if (i < this.props.pages.length - 1) {
+          const page = this.props.pages[i + 1]
+          this.loadPage(page)
+        }
+      }
+
+      onUpdated() {
+        this.root.querySelector('select').value = this.props.page
+      }
+
+      loadPage(page) {
+        const h = this.props.loadPage
+        if (h) {h(page)}
+      }
+
+    }
+  </script>
+</pagination>
