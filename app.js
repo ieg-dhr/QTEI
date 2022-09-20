@@ -1,12 +1,3 @@
-/*
- url persistence (page)
- column toggles
- sessionStorage persistence (column visibility)
- more beautiful
- github repo: https://github.com/ieg-dhr/QTEI
- fix xml linting!
- */
-
 import './lib.js'
 
 import {wrapAll, toggleWWhiteSpace, indexW} from './lib/processors.js'
