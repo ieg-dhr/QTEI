@@ -1,8 +1,20 @@
+@import "bootstrap/scss/functions";
 @import 'themes/journal.variables';
 
 $input-btn-focus-box-shadow: none;
 
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/helpers";
+
+// @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'highlight.js/styles/github.css';
 
@@ -35,9 +47,13 @@ w[active=true] {
   color: #aa0000;
 }
 
-viewer {
+[is='viewer'] {
   .column {
-    background-color: #EDFFEA;
+    transition: width 1s;
+
+    & > * {
+      width: 100%;
+    }
   }
 }
 

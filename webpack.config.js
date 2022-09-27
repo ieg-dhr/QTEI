@@ -1,38 +1,43 @@
 const dotenv = require('dotenv')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 const path = require('path')
 
 module.exports = (env, argv) => {
-  const mode = argv.mode || 'development'
-  // if (mode == 'production') {
-    // dotenv.config({path: '.env.production'})
-  // }
   dotenv.config({path: '.env'})
-  const useSsl = (process.env.USE_SSL == 'true')
 
-  // console.log(mode, process.env.STATIC_URL)
+  const mode = argv.mode || 'development'
+  const optimization = (mode == 'development' ? undefined : {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin()
+    ],
+  })
+  const devtool = (mode == 'development' ? 'eval-source-map' : false)
 
   return {
-    mode: mode,
+    mode,
+    optimization,
+    devtool,
     entry: {
-      app: __dirname + '/app.js'
+      app: __dirname + '/app.js',
+      qtei: __dirname + '/lib.js'
     },
     output: {
       path: __dirname + '/public',
       filename: '[name].js',
       clean: true
     },
-    devtool: mode == 'development' ? 'eval-source-map' : false,
     devServer: {
       compress: true,
       port: 4000,
       hot: false,
-      https: useSsl,
-      headers: {
-        'ACCESS-CONTROL-ALLOW-ORIGIN': 'https://dfk-paris.org'
-      },
+      https: false,
       devMiddleware: {
         writeToDisk: true
       },
@@ -59,7 +64,7 @@ module.exports = (env, argv) => {
         }, {
           test: /\.css$/i,
           use: [
-            'style-loader',
+            (mode == 'development' ? 'style-loader' : MiniCssExtractPlugin.loader),
             {
               loader: 'css-loader',
               options: {url: false}
@@ -68,7 +73,7 @@ module.exports = (env, argv) => {
         }, {
           test: /\.s[ac]ss$/i,
           use: [
-            'style-loader',
+            (mode == 'development' ? 'style-loader' : MiniCssExtractPlugin.loader),
             {
               loader: 'css-loader',
               options: {url: false}
@@ -90,6 +95,10 @@ module.exports = (env, argv) => {
     plugins: [
       new webpack.DefinePlugin({
 
+      }),
+      new MiniCssExtractPlugin({
+        filename: "[name].css",
+        chunkFilename: "[id].css",
       }),
       new HtmlWebpackPlugin({
         template: 'index.ejs',
