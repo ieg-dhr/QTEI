@@ -14,7 +14,7 @@ function linkify(content) {
 }
 
 new TeiViewer('[is=viewer]', {
-  src: 'data/bombers_baedeker.xml',
+  src: 'data/content.xml',
   processors: [
     toggleWWhiteSpace(false),
     wrapAll('persName', 'person-fill', 'person'),
