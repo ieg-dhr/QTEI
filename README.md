@@ -8,10 +8,14 @@ The QTEI.js library can be integrated in projects in several ways:
 
 ### Via Browser `<script>` Tag
 
-First copy your TEI file into a directory in your project where it is available
+Follow the [development setup guide](#via-a-local-development-environment) and
+run npm run build. This buildes `qtei.js` and `qtei.css` to the `public/`
+directory.
+
+Now copy your TEI file to a directory in your project where it is available
 with a url.
 
-Then, download qtei.js into your project directory and since it depends on
+Then, copy `qtei.js` and `qtei.css` into your project and since it depends on
 [twitter bootstrap](https://www.npmjs.com/package/bootstrap) for rendering,
 Include that before as well, like this:
 
@@ -28,6 +32,8 @@ Include that before as well, like this:
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
     crossorigin="anonymous"
   />
+
+  <link rel="stylesheet" type="text/css" href="path/to/qtei.css" />
 </head>
 <body>
   <div id="viewer"></div>
