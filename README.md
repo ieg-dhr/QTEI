@@ -1,6 +1,6 @@
 # QTEI
 
-Visualize your TEI documents easily
+Visualize your TEI documents easily.
 
 ## Usage
 
