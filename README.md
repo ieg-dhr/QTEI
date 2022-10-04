@@ -6,6 +6,11 @@ Visualize your TEI documents easily
 
 The QTEI.js library can be integrated in projects in several ways:
 
+* build the library and add it to your project (wordpress, drupal, static page
+  etc.)
+* use the development server to work on your TEI files or on the library's code
+  itself (with live reload)
+
 ### Via Browser `<script>` Tag
 
 Follow the [development setup guide](#via-a-local-development-environment) and
