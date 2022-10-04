@@ -23,10 +23,13 @@
           <pre class="px-3"><code id="raw"></code></pre>
         </div>
         <div class="col column {classesFor('text')}">
-          <div class="px-3 tei {classesFor('text')}" id="transcription" />
+          <div class="px-3 tei" id="transcription" />
         </div>
         <div class="col px-3 column {classesFor('facsimile')}">
           <img id="facsimile" class="w-100" src="{state.facsimileUrl}" />
+        </div>
+        <div class="col px-3 column {classesFor('map')}">
+          <div id="map" style="height: 500px"></div>
         </div>
       </div>
     </div>
@@ -76,6 +79,8 @@
         r.append(this.state.code)
         t.append(this.state.content)
         hljs.highlightElement(r)
+
+        this.postProcess()
       }
 
       toPage(newPage) {
@@ -90,7 +95,7 @@
       }
 
       getColumns() {
-        const str = sessionStorage.getItem('columns') || 'code,text,facsimile'
+        const str = sessionStorage.getItem('columns') || 'code,text,facsimile,map'
         return str.split(',')
       }
 
@@ -121,6 +126,12 @@
       augment(content) {
         for (const processor of this.props.processors) {
           processor(content)
+        }
+      }
+
+      postProcess() {
+        for (const processor of this.props.postProcessors) {
+          processor()
         }
       }
     }
