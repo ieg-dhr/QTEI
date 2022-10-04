@@ -14,7 +14,7 @@ The QTEI.js library can be integrated in projects in several ways:
 ### Via Browser `<script>` Tag
 
 Follow the [development setup guide](#via-a-local-development-environment) and
-run npm run build. This buildes `qtei.js` and `qtei.css` to the `public/`
+run npm run build. This builds `qtei.js` and `qtei.css` to the `public/`
 directory.
 
 Now copy your TEI file to a directory in your project where it is available
@@ -22,7 +22,7 @@ with a url.
 
 Then, copy `qtei.js` and `qtei.css` into your project and since it depends on
 [twitter bootstrap](https://www.npmjs.com/package/bootstrap) for rendering,
-Include that before as well, like this:
+include that before as well, like this:
 
 ~~~html
 <!DOCTYPE html>
@@ -55,7 +55,7 @@ Include that before as well, like this:
 
 This loads qtei.js from `path/to/qtei.js` and sets it up to instantiate a
 TeiViewer within the first element matching the selector. The instance will
-then load the tei file at `url/to/tei.xml`.
+then load the TEI file at `url/to/tei.xml`.
 
 ### Via a Local Development Environment
 
