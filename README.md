@@ -14,7 +14,7 @@ The QTEI.js library can be integrated in projects in several ways:
 ### Via Browser `<script>` Tag
 
 Follow the [development setup guide](#via-a-local-development-environment) and
-run npm run build. This builds `qtei.js` and `qtei.css` to the `public/`
+run `npm run build`. This builds `qtei.js` and `qtei.css` to the `public/`
 directory.
 
 Now copy your TEI file to a directory in your project where it is available
