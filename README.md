@@ -12,7 +12,7 @@ The QTEI.js library can be used in two ways:
 * use just some parts of the library to build your own and integrate into your
   own systems
 
-Either way, QTEI works either through a `<script>` tag or as a es6 module. An
+Either way, QTEI works either through a `<script>` tag or as a ES6 module. An
 easy way to get started is to use the integrated development environment which
 allows you to change your XML or functionality on the fly.
 
