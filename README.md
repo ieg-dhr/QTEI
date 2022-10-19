@@ -42,7 +42,7 @@ Use something like the following code to include QTei in your web page or CMS:
 
     <link
       rel="stylesheet"
-      type="text/css" href="https://unpkg.com/@wendig/qtei/qtei.min.css"
+      type="text/css" href="https://unpkg.com/@wendig/qtei@0.6.1/dist/qtei.min.css"
     />
 
     <!-- include these if you intend to use the map component -->
@@ -54,9 +54,20 @@ Use something like the following code to include QTei in your web page or CMS:
   <body>
     <div is="qtei-viewer"></div>
 
-    <script src="https://unpkg.com/@wendig/qtei/qtei.min.js"></script>
+    <script src="https://unpkg.com/@wendig/qtei@0.6.1/dist/qtei.min.js"></script>
     <script>
-      var qtei = new QTei.Viewer('[is=qtei-viewer')
+      var qtei = new QTei.Viewer('[is=qtei-viewer', {
+        src: "content.xml",
+        processors: [
+          QTei.processors.wrapAll('persName', 'person-fill', 'person'),
+          QTei.processors.wrapAll("rs[type='person']", 'person-fill', 'person'),
+          QTei.processors.wrapAll('placeName', 'geo-alt-fill', 'place'),
+          QTei.processors.wrapAll("rs[type='artwork']", 'palette-fill', 'artwork'),
+          QTei.processors.renderXmlTo('#raw'),
+          QTei.processors.highlightXml('#raw'),
+          QTei.processors.renderContentTo('#content')
+        ]
+      })
     </script>
   </body>
 </html>
