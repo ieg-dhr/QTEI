@@ -1,3 +1,5 @@
+import {formatXml} from './util'
+
 const ancestorsFor = (node) => {
   if (node === null) {return []}
   if (node.parentNode === null) {return [node]}
@@ -62,32 +64,23 @@ export default class TeiDoc {
 
   constructor(doc) {
     this.doc = doc
-    window.doc = doc
     this.cache = {}
   }
 
   pbs(){
     if (!this.cache['pbs']) {
       this.cache['pbs'] = [...this.doc.querySelectorAll('pb')]
-      console.log(this.cache['pbs'])
     }
 
     return this.cache['pbs']
   }
 
-  facsimileUrl(id) {
-    const pb = this.doc.querySelector(`pb[n='${id}']`)
-    const url = pb.getAttribute('facs')
-    if (!url) {return null}
-
-    return url.replaceAll(
-      /\/content\/pageview\/(\d+)$/g,
-      "/download/webcache/2000/$1"
-    )
-  }
-
   pageIds() {
     return this.pbs().map(e => e.getAttribute('n'))
+  }
+
+  firstPage() {
+    return this.pageIds()[0]
   }
 
   extractPage(id) {
@@ -106,5 +99,16 @@ export default class TeiDoc {
     stripNode(b)
 
     return clone
+  }
+
+  pageData(page) {
+    const content = this.extractPage(page)
+    const data = {
+      page,
+      content,
+      code: formatXml(content.outerHTML, '  ')
+    }
+
+    return data
   }
 }

@@ -4,24 +4,28 @@
       class="btn btn-primary"
       type="button"
       onclick={event => onPrevious(event)}
-    ><i class="bi-arrow-left-circle-fill"></i></button>
+    >
+      <svg class="bi" width="16" height="16" fill="currentColor">
+        <use xlink:href="bootstrap-icons.svg#arrow-left-circle-fill" />
+      </svg>
+    </button>
     <select class="form-control" onchange={event => onChange(event)}>
-      <option>Select page</option>
+      <option value="">Select page</option>
       <option each={page in props.pages}>{page}</option>
     </select>
     <button
       class="btn btn-primary"
       type="button"
       onclick={event => onNext(event)}
-    ><i class="bi-arrow-right-circle-fill"></i></button>
+    >
+      <svg class="bi" width="16" height="16" fill="currentColor">
+        <use xlink:href="bootstrap-icons.svg#arrow-right-circle-fill" />
+      </svg>
+    </button>
   </div>
 
   <script>
     export default class {
-      onBeforeMount(props) {
-        console.log(props.pages)
-      }
-
       onChange(event) {
         const value = event.target.value
         this.loadPage(value)
@@ -50,7 +54,14 @@
       }
 
       onUpdated() {
-        this.root.querySelector('select').value = this.props.page
+        const page = this.props.page
+        const select = this.root.querySelector('select')
+
+        if (!page) {
+          select.selectedIndex = 0
+        } else {
+          select.value = page
+        }
       }
 
       loadPage(page) {

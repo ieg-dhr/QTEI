@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   id="svg6624"
+   sodipodi:docname="1281229876.svg"
+   inkscape:export-filename="book.png"
+   viewBox="0 0 636.42003 636.41998"
+   inkscape:export-xdpi="38.616009"
+   version="1.1"
+   inkscape:export-ydpi="38.616009"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   width="636.41998"
+   height="636.41998"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs914" />
+  <sodipodi:namedview
+     id="base"
+     bordercolor="#666666"
+     inkscape:pageshadow="2"
+     inkscape:window-y="32"
+     pagecolor="#ffffff"
+     inkscape:window-height="746"
+     inkscape:window-maximized="1"
+     inkscape:zoom="0.98994949"
+     inkscape:window-x="0"
+     showgrid="false"
+     borderopacity="1.0"
+     inkscape:current-layer="layer1"
+     inkscape:cx="344.9671"
+     inkscape:cy="365.67522"
+     inkscape:window-width="1280"
+     inkscape:pageopacity="0.0"
+     inkscape:document-units="px"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1" />
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     transform="translate(-81.432495,-150.5365)">
+    <path
+       id="path6726"
+       style="fill:#e9514d;stroke:#000000;stroke-width:2.0716px;fill-opacity:1"
+       d="m 83.75,648.36 v 9.6183 l 5.919,11.838 16.277,22.936 21.456,18.497 19.977,13.318 11.838,4.4392 39.213,5.1791 338.86,25.156 179.05,-482.4 -18.497,0.7399 -8.8785,-13.318 -10.358,-16.277 -3.6994,-23.676 -2.2196,-15.537 8.1386,-32.554 -5.1791,-0.73987 -319.63,31.815 h -7.3987 l -5.1791,-2.9595 -253.04,432.83 -6.6589,11.098 z" />
+    <path
+       id="path6728"
+       style="fill:#ffffff;stroke:#000000;stroke-width:2.0716px"
+       d="m 94.108,652.8 5.1791,12.578 14.058,21.456 19.977,17.017 17.017,11.098 11.098,5.919 36.994,1.4797 329.24,22.196 176.09,-463.9 -7.3987,-3.6994 -19.237,-28.115 -4.4392,-45.132 -181.27,465.38 -19.977,2.2196 -377.34,-18.497 z" />
+    <path
+       id="path6730"
+       style="fill:none;stroke:#000000;stroke-width:2.0716px"
+       d="M 100.03,652.8 352.33,208.14" />
+    <path
+       id="path6732"
+       style="fill:none;stroke:#000000;stroke-width:2.0716px"
+       d="m 473.66,672.77 -1.4797,17.757 5.919,19.237 25.156,22.196 17.757,11.838" />
+  </g>
+  <metadata
+     id="metadata911">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Book</dc:title>
+        <dc:date>2010-08-08T01:11:16</dc:date>
+        <dc:description>A slightly sketchy, greyscale book</dc:description>
+        <dc:source>https://openclipart.org/detail/78469/book-by-gingercoons</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>gingercoons</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>black and white</rdf:li>
+            <rdf:li>book</rdf:li>
+            <rdf:li>closed book</rdf:li>
+            <rdf:li>greyscale</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

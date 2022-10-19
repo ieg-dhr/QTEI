@@ -109,8 +109,8 @@ module.exports = (env, argv) => {
       new CopyWebpackPlugin({
         patterns: [
           {from: 'data/*'},
-          {from: 'node_modules/@fortawesome/fontawesome-free/webfonts/*', to: 'webfonts/[name][ext]'},
-          {from: 'node_modules/bootstrap-icons/font/fonts/*', to: 'fonts/[name][ext]'}
+          {from: 'assets/*'},
+          {from: 'node_modules/bootstrap-icons/bootstrap-icons.svg', to: ''}
         ]
       })
     ]

@@ -1,6 +1,6 @@
 <column-control>
   <div
-    each={id in ['code', 'text', 'facsimile', 'map']}
+    each={id in ['code', 'content', 'facsimile', 'map']}
     class="form-check form-switch me-5"
   >
     <input
@@ -17,7 +17,6 @@
       for="switch-{id}"
     >{id}</label>
   </div>
-
 
   <script>
     export default class {

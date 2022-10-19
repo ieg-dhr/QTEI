@@ -4,60 +4,75 @@ Visualize your TEI documents easily.
 
 ## Usage
 
-The QTEI.js library can be integrated in projects in several ways:
+The QTEI.js library can be used in two ways:
 
-* build the library and add it to your project (wordpress, drupal, static page
-  etc.)
-* use the development server to work on your TEI files or on the library's code
-  itself (with live reload)
+* use the integrated viewer (shows TEI XML source along rendered text
+  with a facsimile and potentially a map). It provides a complete experience but
+  isn't as customizable out of the box
+* use just some parts of the library to build your own and integrate into your
+  own systems
 
-### Via Browser `<script>` Tag
+Either way, QTei works either through a `<script>` tag or as a es6 module. An
+easy way to get started is to use the integrated development environment which
+allows you to change your XML or functionality on the fly.
 
-Follow the [development setup guide](#via-a-local-development-environment) and
-run npm run build. This buildes `qtei.js` and `qtei.css` to the `public/`
-directory.
+## Getting started
 
-Now copy your TEI file to a directory in your project where it is available
-with a url.
-
-Then, copy `qtei.js` and `qtei.css` into your project and since it depends on
-[twitter bootstrap](https://www.npmjs.com/package/bootstrap) for rendering,
-Include that before as well, like this:
+Use something like the following code to include QTei in your web page or CMS:
 
 ~~~html
 <!DOCTYPE html>
+
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <!-- when using the viewer widget, also include bootstrap to provide a
+      default look, otherwise, just write your own css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/bootswatch@5.2.2/dist/journal/bootstrap.min.css"
+    />
 
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-    crossorigin="anonymous"
-  />
+    <!-- include the css for highlighting the XML TEI source (highlight.js) -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/github.min.css"
+    />
 
-  <link rel="stylesheet" type="text/css" href="path/to/qtei.css" />
-</head>
-<body>
-  <div id="viewer"></div>
+    <link
+      rel="stylesheet"
+      type="text/css" href="https://unpkg.com/@wendig/qtei/qtei.min.css"
+    />
 
-  <script type="text/javascript" src="path/to/qtei.js"></script>
-  <script type="text/javascript">
-    var viewer = new TeiViewer('#viewer', {
-      src: 'url/to/tei.xml',
-    })
-  </script>
-</body>
+    <!-- include these if you intend to use the map component -->
+    <link
+      rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"></script>
+  </head>
+  <body>
+    <div is="qtei-viewer"></div>
+
+    <script src="https://unpkg.com/@wendig/qtei/qtei.min.js"></script>
+    <script>
+      var qtei = new QTei.Viewer('[is=qtei-viewer')
+    </script>
+  </body>
 </html>
 ~~~
 
-This loads qtei.js from `path/to/qtei.js` and sets it up to instantiate a
-TeiViewer within the first element matching the selector. The instance will
-then load the tei file at `url/to/tei.xml`.
+Alternatively, add it to our project with npm:
 
-### Via a Local Development Environment
+    npm install @wendig/qtei
+
+And then
+
+    import QTei from '@wendig/qtei'
+    const qtei = new QTei.Viewer(...)
+    ...
+
+## Development
 
 This repository comes with a development server preconfigured to render your
 TEI document within a demo page.
@@ -79,15 +94,7 @@ At this point, you should see your TEI file rendered at http://localhost:4000.
 Use whatever editor you prefer to make modifications to the viewer itself or to
 the TEI content, the page will immediately reflect the changes.
 
+## Licenses
 
-## Development
-
-To get a development environment up and running, first follow the
-[setup guide above](#via-a-local-development-environment). Modifications to the
-component's configuration can be made in `app.js`. Specifically, a list of
-processors can be configured to run on the content. Processors are simple
-JavaScript functions and they receive one argument `content`, a dom node
-representing the currently selected TEI page. Make whatever modifications you
-see fit. For some examples, have a look at `lib/processors.js`. If you'd like
-to use or wrap one of them, they are also available within the
-`TeiViewer.processors` object.
+* https://freesvg.org/black-book-with-many-pages
+* https://freesvg.org/tilted-grayscale-book

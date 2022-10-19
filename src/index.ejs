@@ -5,6 +5,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link rel="shortcut icon" type="image/svg" href="assets/favicon.png" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/bootswatch@5.2.2/dist/journal/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/github.min.css"
+    />
+
     <link rel="stylesheet" type="text/css" href="app.css" />
 
     <link
@@ -19,13 +33,14 @@
       crossorigin=""
     ></script>
 
-    <title></title>
+    <title>QTei Demo</title>
   </head>
   <body>
-    <h1 class="text-center mt-5">QTEI Demo</h1>
-    
-    <div is="viewer"></div>
+    <h1 class="text-center mt-5">QTei Demo</h1>
 
+    <div is="qtei-viewer"></div>
+
+    <script src="qtei.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
