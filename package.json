@@ -1,9 +1,10 @@
 {
   "name": "@wendig/qtei",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "repository": "https://github.com/ieg-dhr/QTEI",
   "bugs": "https://github.com/ieg-dhr/QTEI/issues",
   "license": "SEE LICENSE IN LICENSE",
+  "main": "src/lib.js",
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
