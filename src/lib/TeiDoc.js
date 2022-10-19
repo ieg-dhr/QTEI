@@ -1,4 +1,4 @@
-import {formatXml} from './util'
+import {formatXml} from './utils'
 
 const ancestorsFor = (node) => {
   if (node === null) {return []}

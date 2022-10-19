@@ -2,7 +2,7 @@ import { component } from 'riot'
 import Renderer from './lib/Renderer'
 import Viewer from './components/viewer.riot'
 import * as processors from './lib/processors'
-import * as utils from './lib/util'
+import * as utils from './lib/utils'
 
 function wrap(ComponentType) {
   return function(selector, opts = {}) {
@@ -12,6 +12,8 @@ function wrap(ComponentType) {
 }
 
 class QTei {
+  static VERSION = process.env.QTEI_VERSION
+
   static Viewer = wrap(Viewer)
   static Renderer = Renderer
 

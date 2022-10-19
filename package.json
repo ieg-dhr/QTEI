@@ -1,6 +1,6 @@
 {
   "name": "@wendig/qtei",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "repository": "https://github.com/ieg-dhr/QTEI",
   "bugs": "https://github.com/ieg-dhr/QTEI/issues",
   "license": "SEE LICENSE IN LICENSE",
@@ -14,7 +14,7 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^14.1.0",
-    "@wendig/lib": "../../js-lib/src",
+    "@wendig/lib": "git+https://git.wendig.io/git/js-lib.git#f498a838",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
     "chokidar-cli": "^3.0.0",

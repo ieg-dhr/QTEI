@@ -1,7 +1,12 @@
+import fs from 'fs'
+
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import dotenv from "rollup-plugin-dotenv"
 import commonjs from '@rollup/plugin-commonjs'
 import riot from 'rollup-plugin-riot'
+
+const pkgData = JSON.parse(fs.readFileSync('package.json'))
+process.env['QTEI_VERSION'] = pkgData['version']
 
 const NODE_ENV = process.env['NODE_ENV'] || 'development'
 const optimize = (NODE_ENV == 'production')
@@ -15,9 +20,9 @@ const demo = {
   },
   plugins: [
     nodeResolve(),
-    dotenv(),
     commonjs(),
     riot(),
+    dotenv()
   ]
 }
 
@@ -30,10 +35,10 @@ const lib = {
   },
   plugins: [
     nodeResolve(),
-    dotenv(),
     commonjs(),
     riot(),
+    dotenv()
   ]
 }
 
-export default [demo, lib]
+export default (optimize ? [lib] : [demo, lib])

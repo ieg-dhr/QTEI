@@ -43,7 +43,7 @@ function mappify(selector) {
     }
 
     if (!map) {
-      const target = document.querySelector('#map')
+      const target = document.querySelector('[qtei-id=map]')
       map = L.map(target).setView([50, 10], 4)
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -75,7 +75,7 @@ function loadBBFacsimile(data) {
     "/download/webcache/2000/$1"
   )
 
-  let img = document.querySelector('#facsimile')
+  let img = document.querySelector('[qtei-id=facsimile]')
   img.setAttribute('src', url)
 }
 
@@ -86,7 +86,7 @@ function functionATFacsimile(data) {
 
   const url = `https://textgridlab.org/1.0/digilib/rest/IIIF/${facs}/full/max/0/default.jpg`
 
-  let img = document.querySelector('#facsimile')
+  let img = document.querySelector('[qtei-id=facsimile]')
   img.setAttribute('src', url)
 }
 
@@ -98,9 +98,9 @@ new QTei.Viewer('[is=qtei-viewer]', {
     QTei.processors.wrapAll("rs[type='person']", 'person-fill', 'person'),
     QTei.processors.wrapAll('placeName', 'geo-alt-fill', 'place'),
     QTei.processors.wrapAll("rs[type='artwork']", 'palette-fill', 'artwork'),
-    QTei.processors.renderXmlTo('#raw'),
-    QTei.processors.highlightXml('#raw'),
-    QTei.processors.renderContentTo('#content'),
+    QTei.processors.renderXmlTo('[qtei-id=raw]'),
+    QTei.processors.highlightXml('[qtei-id=raw]'),
+    QTei.processors.renderContentTo('[qtei-id=content]'),
     // QTei.processors.indexW,
     // linkify,
     loadBBFacsimile,

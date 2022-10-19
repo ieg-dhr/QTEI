@@ -1,4 +1,4 @@
-import {wrapWithIcon, wrapInLink} from './util.js'
+import {wrapWithIcon, wrapInLink} from './utils.js'
 import hljs from 'highlight.js/lib/core'
 import xml from 'highlight.js/lib/languages/xml'
 

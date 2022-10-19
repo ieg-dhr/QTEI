@@ -22,16 +22,16 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col column {classesFor('code')}">
-          <pre class="px-3"><code id="raw"></code></pre>
+          <pre class="px-3"><code qtei-id="raw"></code></pre>
         </div>
         <div class="col column {classesFor('content')}">
-          <div class="px-3 tei" id="content" />
+          <div class="px-3 tei" qtei-id="content" />
         </div>
         <div class="col px-3 column {classesFor('facsimile')}">
-          <img id="facsimile" class="w-100" src="{state.facsimileUrl}" />
+          <img qtei-id="facsimile" class="w-100" src="{state.facsimileUrl}" />
         </div>
         <div class="col px-3 column {classesFor('map')}">
-          <div id="map" style="height: 500px"></div>
+          <div qtei-id="map" style="height: 500px"></div>
         </div>
       </div>
     </div>
@@ -39,6 +39,7 @@
 
   <script>
     import {Url, util} from '@wendig/lib'
+    import {loadIcons} from '../lib/utils.js'
 
     import TeiDoc from '../lib/TeiDoc.js'
     import Renderer from '../lib/Renderer.js'
@@ -50,6 +51,7 @@
       static components = {Pagination, ColumnControl}
       constructor() {
         this.onHashChange = this.onHashChange.bind(this)
+        loadIcons()
       }
 
       onBeforeMount(props) {
