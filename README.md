@@ -18,7 +18,7 @@ allows you to change your XML or functionality on the fly.
 
 ## Getting started
 
-Use something like the following code to include QTei in your web page or CMS:
+Use something like the following code to include QTEI in your web page or CMS:
 
 ~~~html
 <!DOCTYPE html>
