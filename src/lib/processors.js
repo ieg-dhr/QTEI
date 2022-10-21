@@ -1,4 +1,5 @@
 import {wrapWithIcon, wrapInLink} from './utils.js'
+import {formatXml} from './utils.js'
 import hljs from 'highlight.js/lib/core'
 import xml from 'highlight.js/lib/languages/xml'
 
@@ -6,6 +7,8 @@ hljs.registerLanguage('xml', xml);
 
 function renderXmlTo(selector) {
   return function(data) {
+    data.code = formatXml(data.content.outerHTML, '  ')
+
     const element = document.querySelector(selector)
     element.innerHTML = ''
     element.append(data.code)

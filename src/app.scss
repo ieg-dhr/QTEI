@@ -43,8 +43,15 @@ column-control {
   }
 }
 
+@namespace tei url(http://www.tei-c.org/ns/1.0);
+
+tei|hi {
+  font-weight: bold !important;
+}
+
 .tei {
   overflow: auto;
+  font-family: serif;
 
   placeName {
     & > * {

@@ -1,5 +1,3 @@
-import {formatXml} from './utils'
-
 const ancestorsFor = (node) => {
   if (node === null) {return []}
   if (node.parentNode === null) {return [node]}
@@ -106,7 +104,7 @@ export default class TeiDoc {
     const data = {
       page,
       content,
-      code: formatXml(content.outerHTML, '  ')
+      doc: this.doc
     }
 
     return data

@@ -79,7 +79,7 @@ function loadBBFacsimile(data) {
   img.setAttribute('src', url)
 }
 
-function functionATFacsimile(data) {
+function loadATFacsimile(data) {
   let pb = data.content.querySelector(`pb`)
   let facs = pb.getAttribute('facs')
   if (!facs) {return null}
@@ -90,21 +90,96 @@ function functionATFacsimile(data) {
   img.setAttribute('src', url)
 }
 
+function loadDTAFacsimile() {
+  let docName = null
+
+  return function run(data) {
+    if (!docName) {
+      const idno = data.doc.querySelector("idno[type='DTADirName']")
+      docName = idno.textContent
+    }
+
+    let pb = data.content.querySelector(`pb`)
+    let facs = pb.getAttribute('facs')
+    if (!facs) {return null}
+
+    const ref = facs.replace('#f', '')
+    const url = `https://media.dwds.de/dta/images/${docName}/${docName}_${ref}_800px.jpg`
+
+    let img = document.querySelector('[qtei-id=facsimile]')
+    img.setAttribute('src', url)
+  }
+}
+
+function toNamespace(namespace, replacements) {
+  function changeNS(node, namespace){
+    const r = replacements[node.nodeName.toLowerCase()]
+    let dup = (r ?
+      document.createElementNS(namespace, r) :
+      document.createElementNS(namespace, node.nodeName)
+    )
+
+    if (node.hasAttributes()) {
+      for (const a of node.attributes) {
+        dup.setAttributeNS(a.namespaceURI, a.nodeName, a.value)
+      }
+    }
+
+    if (node.hasChildNodes()) {
+      for (const a of node.childNodes) {
+        if (a.nodeType == 1) { // element node
+          dup.appendChild(changeNS(a, namespace))
+        } else {
+          dup.appendChild(a.cloneNode(false))
+        }
+      }
+    }
+
+    return dup
+  }
+
+  return function run(data) {
+    data.content = changeNS(data.content, namespace)
+  }
+}
+
+function applyCSSRendition() {
+  let styleMap = null
+
+  return function run(data) {
+    if (!styleMap) {
+      styleMap = {}
+      for (const e of data.doc.querySelectorAll("rendition[scheme=css]")) {
+        styleMap[e.getAttribute('xml:id')] = e.textContent
+      }
+    }
+
+    for (const e of data.content.querySelectorAll('[rendition]')) {
+      const ref = e.getAttribute('rendition').replace('#', '')
+      e.setAttribute('style', styleMap[ref])
+    }
+  }
+}
+
 new QTei.Viewer('[is=qtei-viewer]', {
-  src: 'data/content.xml',
+  // src: 'data/dta/brehm_thierleben01_1864.TEI-P5.xml',
+  src: 'data/dta/chamisso_schlemihl_1814.TEI-P5.xml',
   processors: [
     // QTei.processors.toggleWWhiteSpace(false),
     QTei.processors.wrapAll('persName', 'person-fill', 'person'),
     QTei.processors.wrapAll("rs[type='person']", 'person-fill', 'person'),
     QTei.processors.wrapAll('placeName', 'geo-alt-fill', 'place'),
     QTei.processors.wrapAll("rs[type='artwork']", 'palette-fill', 'artwork'),
+    toNamespace('http://www.w3.org/1999/xhtml', {head: 'tei-head'}),
     QTei.processors.renderXmlTo('[qtei-id=raw]'),
     QTei.processors.highlightXml('[qtei-id=raw]'),
     QTei.processors.renderContentTo('[qtei-id=content]'),
     // QTei.processors.indexW,
     // linkify,
-    loadBBFacsimile,
-    // functionATFacsimile,
-    mappify("placeName")
+    // loadBBFacsimile,
+    // loadATFacsimile,
+    loadDTAFacsimile(),
+    applyCSSRendition(),
+    // mappify("placeName")
   ]
 })
