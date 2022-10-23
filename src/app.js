@@ -1,5 +1,3 @@
-// import './lib.js'
-
 function linkify(data) {
   for (const element of data.content.querySelectorAll('.place')) {
     let geo = element.querySelector('geo')
@@ -15,13 +13,14 @@ function mappify(selector) {
   let map = null
   let dl = null
 
-  return function() {
+  return function(data) {
     let geoJSON = {
       type: "FeatureCollection",
       features: []
     }
 
-    for (const element of document.querySelectorAll(selector)) {
+    window.data = data.content
+    for (const element of data.content.querySelectorAll(selector)) {
       const geo = element.querySelector('geo')
       if (!geo) {continue}
 
@@ -111,24 +110,26 @@ function loadDTAFacsimile() {
   }
 }
 
-function toNamespace(namespace, replacements) {
-  function changeNS(node, namespace){
+function toNamespace(from, to, replacements) {
+  function changeNS(node, to){
+    if (node.namespaceURI != from) {return node}
+
     const r = replacements[node.nodeName.toLowerCase()]
     let dup = (r ?
-      document.createElementNS(namespace, r) :
-      document.createElementNS(namespace, node.nodeName)
+      document.createElementNS(to, r) :
+      document.createElementNS(to, node.nodeName)
     )
 
     if (node.hasAttributes()) {
       for (const a of node.attributes) {
-        dup.setAttributeNS(a.namespaceURI, a.nodeName, a.value)
+        dup.setAttribute(a.nodeName, a.value)
       }
     }
 
     if (node.hasChildNodes()) {
       for (const a of node.childNodes) {
         if (a.nodeType == 1) { // element node
-          dup.appendChild(changeNS(a, namespace))
+          dup.appendChild(changeNS(a, to))
         } else {
           dup.appendChild(a.cloneNode(false))
         }
@@ -139,7 +140,7 @@ function toNamespace(namespace, replacements) {
   }
 
   return function run(data) {
-    data.content = changeNS(data.content, namespace)
+    data.htmlDOM = changeNS(data.content, to)
   }
 }
 
@@ -154,32 +155,58 @@ function applyCSSRendition() {
       }
     }
 
-    for (const e of data.content.querySelectorAll('[rendition]')) {
+    for (const e of data.htmlDOM.querySelectorAll('[rendition]')) {
       const ref = e.getAttribute('rendition').replace('#', '')
       e.setAttribute('style', styleMap[ref])
     }
   }
 }
 
+function teiUrl() {
+  // const d = 'data/dta/chamisso_schlemihl_1814.TEI-P5.xml'
+  const d = 'data/content.xml'
+
+  const search = document.location.search.replace('?', '')
+  if (search == '') return d
+
+  for (const pair of search.split('&')) {
+    const [k, v] = pair.split('=')
+    if (k == 'tei') return v
+  }
+
+  return d
+}
+
+function renderHTMLTo(selector) {
+  return function(data) {
+    const element = document.querySelector(selector)
+    element.innerHTML = ''
+    element.append(data.htmlDOM)
+  }
+}
+
 new QTei.Viewer('[is=qtei-viewer]', {
-  // src: 'data/dta/brehm_thierleben01_1864.TEI-P5.xml',
-  src: 'data/dta/chamisso_schlemihl_1814.TEI-P5.xml',
+  src: teiUrl(),
   processors: [
     // QTei.processors.toggleWWhiteSpace(false),
     QTei.processors.wrapAll('persName', 'person-fill', 'person'),
     QTei.processors.wrapAll("rs[type='person']", 'person-fill', 'person'),
     QTei.processors.wrapAll('placeName', 'geo-alt-fill', 'place'),
     QTei.processors.wrapAll("rs[type='artwork']", 'palette-fill', 'artwork'),
-    toNamespace('http://www.w3.org/1999/xhtml', {head: 'tei-head'}),
     QTei.processors.renderXmlTo('[qtei-id=raw]'),
     QTei.processors.highlightXml('[qtei-id=raw]'),
-    QTei.processors.renderContentTo('[qtei-id=content]'),
+    loadBBFacsimile,
+    mappify('placeName'),
+    toNamespace(
+      'http://www.tei-c.org/ns/1.0',
+      'http://www.w3.org/1999/xhtml',
+      {head: 'tei-head'}
+    ),
+    applyCSSRendition(),
+    renderHTMLTo('[qtei-id=content]')
     // QTei.processors.indexW,
     // linkify,
-    // loadBBFacsimile,
     // loadATFacsimile,
-    loadDTAFacsimile(),
-    applyCSSRendition(),
-    // mappify("placeName")
+    // loadDTAFacsimile(),
   ]
 })

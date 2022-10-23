@@ -6,12 +6,12 @@ https://user-images.githubusercontent.com/506366/196818784-b2f81a76-97b4-46d7-ab
 
 ## Getting started
 
-QTei works as a ES6 module, can be used with the browser directly and ships a
+QTEI works as a ES6 module, can be used with the browser directly and ships a
 development environment:
 
 ### ES6 module
 
-Add QTei to your javascript project with npm
+Add QTEI to your javascript project with npm
 
     npm install @wendig/qtei -D
     
@@ -64,7 +64,7 @@ the TEI content, the page will immediately reflect the changes.
 
 ## Usage
 
-In general, the QTEI.js library can be used in two ways:
+In general, the QTEI library can be used in two ways:
 
 * use the integrated viewer (shows TEI XML source along rendered text
   with a facsimile and potentially a map). It provides a pagination, column
@@ -72,7 +72,7 @@ In general, the QTEI.js library can be used in two ways:
 * use just some parts of the library to build your own and integrate into your
   own systems
 
-This is a example of a full html page making use of QTei:
+This is a example of a full html page making use of QTEI:
 
 ~~~html
 <!DOCTYPE html>
