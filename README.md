@@ -6,12 +6,12 @@ https://user-images.githubusercontent.com/506366/196818784-b2f81a76-97b4-46d7-ab
 
 ## Getting started
 
-QTei works as a ES6 module, can be used with the browser directly and ships a
+QTEI works as a ES6 module, can be used with the browser directly and ships a
 development environment:
 
 ### ES6 module
 
-Add QTei to your javascript project with npm
+Add QTEI to your javascript project with npm
 
     npm install @wendig/qtei -D
     
