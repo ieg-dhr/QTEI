@@ -2,7 +2,7 @@
 
 Visualize your TEI documents easily.
 
-https://user-images.githubusercontent.com/506366/196818784-b2f81a76-97b4-46d7-abb5-804e3b12d81c.mov
+https://user-images.githubusercontent.com/506366/197420844-0f9e97ae-7043-4e7d-a625-ad920ab49b7f.mov
 
 ## Getting started
 
