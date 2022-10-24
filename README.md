@@ -1,6 +1,6 @@
 # QTEI
 
-Visualize your TEI documents easily.
+Quick TEI (QTEI) - Visualize your TEI documents easily.
 
 
 https://user-images.githubusercontent.com/506366/197421865-afef1331-2cb1-4e26-89a6-2aadef28ee64.mov
