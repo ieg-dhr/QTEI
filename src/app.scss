@@ -96,4 +96,11 @@ tei|hi {
   unit {
     display: none;
   }
+
+  a.note {
+    color: orange;
+    cursor: pointer;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
 }

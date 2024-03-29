@@ -60,6 +60,7 @@ function loadIcons() {
 }
 
 export {
+  icon,
   loadIcons,
   formatXml,
   wrapInLink,

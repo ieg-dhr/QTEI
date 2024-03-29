@@ -1,15 +1,11 @@
 export default class Renderer {
-  constructor(doc, processors = []) {
-    this.doc = doc
+  constructor(processors = []) {
     this.processors = processors
   }
 
-  render(page) {
-    if (!page) return
-
-    const data = this.doc.pageData(page)
+  render(doc) {
     for (const processor of this.processors) {
-      processor(data)
+      processor(doc)
     }
   }
 }

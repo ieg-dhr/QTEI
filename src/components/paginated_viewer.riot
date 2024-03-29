@@ -1,4 +1,4 @@
-<viewer>
+<paginated-viewer>
   <template if={state.doc}>
     <div class="row justify-content-center">
       <div class="col-3">
@@ -56,7 +56,7 @@
 
       onBeforeMount(props) {
         TeiDoc.load(props.src).then(doc => {
-          const renderer = new Renderer(doc, props.processors)
+          const renderer = new Renderer(props.processors)
           this.update({renderer, doc})
 
           window.addEventListener('hashchange', this.onHashChange)
@@ -72,10 +72,12 @@
         const url = Url.current()
         const params = url.hashParams()
         const page = params['page']
+        if (!page) return
 
         this.update({id: page})
 
-        this.state.renderer.render(page)
+        const doc = this.state.doc.pageData(page)
+        this.state.renderer.render(doc)
       }
 
       toPage(newPage) {
@@ -101,4 +103,4 @@
       }
     }
   </script>
-</viewer>
+</paginated-viewer>

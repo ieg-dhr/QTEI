@@ -52,10 +52,9 @@ export default class TeiDoc {
       then(response => response.text()).
       then(text => {
         const parser = new DOMParser()
-        console.log('parsing XML ...')
         const now = new Date()
         const result = parser.parseFromString(text, "application/xml")
-        console.log('... done', (new Date()) - now)
+        console.log(`xml doc parsed (${(new Date()) - now}ms)`)
         return new TeiDoc(result)
       })
   }
@@ -75,6 +74,10 @@ export default class TeiDoc {
 
   pageIds() {
     return this.pbs().map(e => e.getAttribute('n'))
+  }
+
+  hasPages() {
+    return this.pbs().length > 0
   }
 
   firstPage() {
@@ -103,6 +106,17 @@ export default class TeiDoc {
     const content = this.extractPage(page)
     const data = {
       page,
+      content,
+      doc: this.doc
+    }
+
+    return data
+  }
+
+  body() {
+    const content = this.doc.querySelector(`text`)
+
+    const data = {
       content,
       doc: this.doc
     }

@@ -1,11 +1,30 @@
+import {icon} from './lib/utils.js'
+
 function linkify(data) {
-  for (const element of data.content.querySelectorAll('.place')) {
-    let geo = element.querySelector('geo')
-    if (geo) {
-      const latlon = geo.textContent
-      const wrapped = QTei.utils.wrapInLink(element, `https://maps.google.com?q=${geo}`)
-      element.replaceWith(wrapped)
-    }
+  // for (const element of data.content.querySelectorAll('.place')) {
+  //   let geo = element.querySelector('geo')
+  //   if (geo) {
+  //     const latlon = geo.textContent
+  //     const wrapped = QTei.utils.wrapInLink(element, `https://maps.google.com?q=${geo}`)
+  //     element.replaceWith(wrapped)
+  //   }
+  // }
+
+  window.doc = data
+
+  for (const element of data.content.querySelectorAll('.person rs')) {
+    const ref = element.getAttribute('ref').replace('#', '')
+    const persName = data.doc.querySelector(`person[id='${ref}'] persName`)
+    if (!persName) continue
+
+    const url = persName.getAttribute('ref')
+    if (!url) continue
+
+    console.log(element).textContent
+
+    element.addEventListener('click', event => {
+      window.open(url, '_blank').focus()
+    })
   }
 }
 
@@ -144,6 +163,26 @@ function toNamespace(from, to, replacements) {
   }
 }
 
+function poppifyNotes(data) {
+  for (const note of data.content.querySelectorAll('note')) {
+    // console.log(note)
+
+    const a = document.createElement('a')
+    a.append(icon('info-circle'))
+    a.classList.add('note')
+
+    const popover = new bootstrap.Popover(a, {
+      title: `Note ${note.getAttribute('type')}`,
+      content: note.textContent,
+      trigger: 'hover'
+    })
+
+
+    a.note = note
+    note.replaceWith(a)
+  }
+}
+
 function applyCSSRendition() {
   let styleMap = null
 
@@ -164,7 +203,9 @@ function applyCSSRendition() {
 
 function teiUrl() {
   // const d = 'data/dta/chamisso_schlemihl_1814.TEI-P5.xml'
-  const d = 'data/content.xml'
+  // const d = 'data/fv/8.xml'
+  const d = 'data/fv/103.xml'
+  // const d = 'data/bombers_baedeker.xml'
 
   const search = document.location.search.replace('?', '')
   if (search == '') return d
@@ -185,17 +226,20 @@ function renderHTMLTo(selector) {
   }
 }
 
-new QTei.Viewer('[is=qtei-viewer]', {
+new QTei.SimpleViewer('[is=qtei-viewer]', {
+// new QTei.PaginatedViewer('[is=qtei-viewer]', {
   src: teiUrl(),
   processors: [
     // QTei.processors.toggleWWhiteSpace(false),
+    QTei.processors.highlightXml('[qtei-id=raw]'),
     QTei.processors.wrapAll('persName', 'person-fill', 'person'),
-    QTei.processors.wrapAll("rs[type='person']", 'person-fill', 'person'),
+    QTei.processors.wrapAll("rs", 'person-fill', 'person'),
     QTei.processors.wrapAll('placeName', 'geo-alt-fill', 'place'),
     QTei.processors.wrapAll("rs[type='artwork']", 'palette-fill', 'artwork'),
+    linkify,
+    poppifyNotes,
     QTei.processors.renderXmlTo('[qtei-id=raw]'),
-    QTei.processors.highlightXml('[qtei-id=raw]'),
-    loadBBFacsimile,
+    // loadBBFacsimile,
     mappify('placeName'),
     toNamespace(
       'http://www.tei-c.org/ns/1.0',

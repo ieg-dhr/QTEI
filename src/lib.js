@@ -1,6 +1,7 @@
 import { component } from 'riot'
 import Renderer from './lib/Renderer'
-import Viewer from './components/viewer.riot'
+import PaginatedViewer from './components/paginated_viewer.riot'
+import SimpleViewer from './components/simple_viewer.riot'
 import * as processors from './lib/processors'
 import * as utils from './lib/utils'
 
@@ -12,9 +13,10 @@ function wrap(ComponentType) {
 }
 
 class QTei {
-  static VERSION = process.env.QTEI_VERSION
+  // static VERSION = process.env.QTEI_VERSION
 
-  static Viewer = wrap(Viewer)
+  static PaginatedViewer = wrap(PaginatedViewer)
+  static SimpleViewer = wrap(SimpleViewer)
   static Renderer = Renderer
 
   static processors = processors
