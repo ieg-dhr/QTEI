@@ -22,11 +22,10 @@ function highlightXml(selector) {
   }
 }
 
-function renderContentTo(selector) {
-  return function(data) {
-    const element = document.querySelector(selector)
+function renderContentTo(element) {
+  return function(teiDoc) {
     element.innerHTML = ''
-    element.append(data.content)
+    element.append(teiDoc.doc)
   }
 }
 

@@ -131,7 +131,7 @@ function loadDTAFacsimile() {
 
 function toNamespace(from, to, replacements) {
   function changeNS(node, to){
-    if (node.namespaceURI != from) {return node}
+    if (node.namespaceURI != from) return
 
     const r = replacements[node.nodeName.toLowerCase()]
     let dup = (r ?
